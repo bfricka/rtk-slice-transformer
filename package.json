@@ -1,6 +1,6 @@
 {
 	"name": "rtk-slice-transformer",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": "Brian Frichette",
 	"description": "A Redux Toolkit slice transformer helpers with side effects reducer.",
 	"keywords": [
@@ -20,14 +20,14 @@
 		"build": "yarn clean && concurrently \"yarn:build:*\"",
 		"build:cjs": "tsc -p src/tsconfig.build.json --outDir cjs --module commonjs",
 		"build:esm": "tsc -p src/tsconfig.build.json --outDir esm --module esnext",
-		"clean": "shx rm -rf dist",
+		"clean": "shx rm -rf ./{cjs,esm}",
 		"codequality": "concurrently --kill-others-on-fail -c magenta,cyan,blue -n pretty,lint,typecheck \"yarn:pretty\" \"yarn:lint\" \"yarn:typecheck\"",
 		"codequality:fix": "yarn pretty:fix && yarn lint:fix",
 		"lint": "eslint --quiet --ext .js,.ts .",
 		"lint:fix": "eslint --fix --ext .js,.ts .",
 		"pretty": "prettier --loglevel=warn -c \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
 		"pretty:fix": "prettier --loglevel=warn -w \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
-		"prepublish": "yarn codequality && yarn build",
+		"prepublishOnly": "yarn codequality && yarn build",
 		"typecheck": "tsc -p src --noEmit",
 		"typecheck:watch": "tsc -w -p src --noEmit"
 	},

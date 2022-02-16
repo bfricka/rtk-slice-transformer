@@ -1,6 +1,7 @@
 ![npm](https://img.shields.io/npm/v/rtk-slice-transformer?style=flat-square)
 ![npm](https://img.shields.io/npm/l/rtk-slice-transformer?style=flat-square)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/rtk-slice-transformer?style=flat-square)
+
 # rtk-slice-transformer
 
 This package creates a simplified interface for transforming a slice, or slices, as well as any
@@ -153,4 +154,5 @@ const rootActionTransformer = combineActionTransformers([
 	mySpecialRootTransformer,
 ])
 ```
+
 All the same caveats apply as [mentioned above](#note-about-action-transformers).
