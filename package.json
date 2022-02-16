@@ -1,0 +1,54 @@
+{
+	"name": "rtk-slice-transformer",
+	"version": "1.0.0",
+	"author": "Brian Frichette",
+	"description": "A Redux Toolkit slice transformer helpers with side effects reducer.",
+	"keywords": [
+		"redux",
+		"redux toolkit",
+		"transformer"
+	],
+	"main": "cjs/index.js",
+	"module": "esm/index.js",
+	"types": "esm/index.d.ts",
+	"files": [
+		"{cjs,esm}/**/*.+(js|ts|map)",
+		"!{cjs,esm}/**/*.spec.*"
+	],
+	"license": "MIT",
+	"scripts": {
+		"build": "yarn clean && concurrently \"yarn:build:*\"",
+		"build:cjs": "tsc -p src/tsconfig.build.json --outDir cjs --module commonjs",
+		"build:esm": "tsc -p src/tsconfig.build.json --outDir esm --module esnext",
+		"clean": "shx rm -rf dist",
+		"codequality": "concurrently --kill-others-on-fail -c magenta,cyan,blue -n pretty,lint,typecheck \"yarn:pretty\" \"yarn:lint\" \"yarn:typecheck\"",
+		"codequality:fix": "yarn pretty:fix && yarn lint:fix",
+		"lint": "eslint --quiet --ext .js,.ts .",
+		"lint:fix": "eslint --fix --ext .js,.ts .",
+		"pretty": "prettier --loglevel=warn -c \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
+		"pretty:fix": "prettier --loglevel=warn -w \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
+		"prepublish": "yarn codequality && yarn build",
+		"typecheck": "tsc -p src --noEmit",
+		"typecheck:watch": "tsc -w -p src --noEmit"
+	},
+	"devDependencies": {
+		"@reduxjs/toolkit": "^1.7.2",
+		"@typescript-eslint/eslint-plugin": "^5.10.1",
+		"@typescript-eslint/parser": "^5.10.1",
+		"@typescript-eslint/utils": "^5.10.1",
+		"concurrently": "^7.0.0",
+		"eslint": "^8.9.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.25.4",
+		"eslint-plugin-prettier": "^4.0.0",
+		"prettier": "^2.5.1",
+		"shx": "^0.3.4",
+		"typescript": "^4.5.5"
+	},
+	"peerDependencies": {
+		"@reduxjs/toolkit": "^1.7",
+		"tslib": "^2.3"
+	},
+	"sideEffects": false,
+	"packageManager": "yarn@3.1.1"
+}

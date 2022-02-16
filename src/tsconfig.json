@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"downlevelIteration": true,
+		"esModuleInterop": true,
+		"importHelpers": true,
+		"importsNotUsedAsValues": "error",
+		"lib": ["ES2021"],
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"strictFunctionTypes": false,
+		"target": "ES2019",
+		"types": []
+	}
+}
