@@ -1,4 +1,7 @@
-# rtx-slice-transformer
+![npm](https://img.shields.io/npm/v/rtk-slice-transformer?style=flat-square)
+![npm](https://img.shields.io/npm/l/rtk-slice-transformer?style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/rtk-slice-transformer?style=flat-square)
+# rtk-slice-transformer
 
 This package creates a simplified interface for transforming a slice, or slices, as well as any
 associated actions, and then performing side effects on the transformed output via an enhancer. The
@@ -26,7 +29,7 @@ an issue if you're having trouble. You'll at least need support for mapped types
 
 ## Usage
 
-`rtx-slice-transformer` exports a few functions that can be used alone or in combination to help
+`rtk-slice-transformer` exports a few functions that can be used alone or in combination to help
 simplify transformations. Below is a straightforward example of how you might structure this.
 
 #### Example
