@@ -1,6 +1,6 @@
 {
 	"name": "rtk-slice-transformer",
-	"version": "1.1.0",
+	"version": "2.0.0",
 	"author": "Brian Frichette",
 	"description": "A Redux Toolkit slice transformer helpers with side effects reducer.",
 	"keywords": [
@@ -20,35 +20,35 @@
 		"build": "yarn clean && concurrently \"yarn:build:*\"",
 		"build:cjs": "tsc -p src/tsconfig.build.json --outDir cjs --module commonjs",
 		"build:esm": "tsc -p src/tsconfig.build.json --outDir esm --module esnext",
-		"clean": "shx rm -rf ./{cjs,esm}",
+		"clean": "shx rm -rf \"./{cjs,esm}\"",
 		"codequality": "concurrently --kill-others-on-fail -c magenta,cyan,blue -n pretty,lint,typecheck \"yarn:pretty\" \"yarn:lint\" \"yarn:typecheck\"",
 		"codequality:fix": "yarn pretty:fix && yarn lint:fix",
 		"lint": "eslint --quiet --ext .js,.ts .",
 		"lint:fix": "eslint --fix --ext .js,.ts .",
-		"pretty": "prettier --loglevel=warn -c \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
-		"pretty:fix": "prettier --loglevel=warn -w \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
+		"pretty": "prettier --log-level=warn -c \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
+		"pretty:fix": "prettier --log-level=warn -w \"**/*.+(css|js|json|jsx|md|scss|ts|tsx|yml|yaml)\"",
 		"prepublishOnly": "yarn codequality && yarn build",
 		"typecheck": "tsc -p src --noEmit",
 		"typecheck:watch": "tsc -w -p src --noEmit"
 	},
 	"devDependencies": {
-		"@reduxjs/toolkit": "^1.7.2",
-		"@typescript-eslint/eslint-plugin": "^5.10.1",
-		"@typescript-eslint/parser": "^5.10.1",
-		"@typescript-eslint/utils": "^5.10.1",
+		"@reduxjs/toolkit": "^2.2.3",
+		"@typescript-eslint/eslint-plugin": "^7.7.1",
+		"@typescript-eslint/parser": "^7.7.1",
+		"@typescript-eslint/utils": "^7.7.1",
 		"concurrently": "^7.0.0",
-		"eslint": "^8.9.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-import": "^2.25.4",
-		"eslint-plugin-prettier": "^4.0.0",
-		"prettier": "^2.5.1",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-prettier": "^5.1.3",
+		"prettier": "^3.2.5",
 		"shx": "^0.3.4",
-		"typescript": "^4.5.5"
+		"typescript": "^5.4.5"
 	},
 	"peerDependencies": {
-		"@reduxjs/toolkit": "^1.7",
-		"tslib": "^2.3"
+		"@reduxjs/toolkit": "^2.2",
+		"tslib": "^2.6"
 	},
 	"sideEffects": false,
-	"packageManager": "yarn@3.1.1"
+	"packageManager": "yarn@4.1.1"
 }

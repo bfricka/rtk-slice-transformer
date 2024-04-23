@@ -4,7 +4,6 @@
 		"downlevelIteration": true,
 		"esModuleInterop": true,
 		"importHelpers": true,
-		"importsNotUsedAsValues": "error",
 		"lib": ["ES2021"],
 		"module": "ESNext",
 		"moduleResolution": "Node",

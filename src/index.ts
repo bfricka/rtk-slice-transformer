@@ -1,16 +1,15 @@
 import type {
 	Action,
-	AnyAction,
-	PreloadedState,
 	Reducer,
 	Slice,
 	StoreEnhancerStoreCreator,
+	UnknownAction,
 } from '@reduxjs/toolkit'
 
 type NameFromSlice<SL extends Slice> = SL extends Slice<any, any, infer N> ? N : never
 type StateFromSlice<SL extends Slice> = SL extends Slice<infer S, any, any> ? S : never
 
-export type ActionTransformer = (action: AnyAction) => any
+export type ActionTransformer = (action: UnknownAction) => any
 
 export type SliceTransformer<SL extends Slice, TS = any> = (state: StateFromSlice<SL>) => TS
 
@@ -32,21 +31,18 @@ export type CachedSliceTransformer<
 	TransformedState = any,
 > = CachedTransformerWithName<StateFromSlice<SL>, TransformedState, NameFromSlice<SL>>
 
-type NameFromCachedSliceTransformer<T> = T extends CachedSliceTransformer<infer Slice>
-	? NameFromSlice<Slice>
-	: never
+type NameFromCachedSliceTransformer<T> =
+	T extends CachedSliceTransformer<infer Slice> ? NameFromSlice<Slice> : never
 
-type StateFromCachedSliceTransformer<T> = T extends CachedSliceTransformer<infer Slice>
-	? StateFromSlice<Slice>
-	: never
+type StateFromCachedSliceTransformer<T> =
+	T extends CachedSliceTransformer<infer Slice> ? StateFromSlice<Slice> : never
 
 type RootStateFromCachedSliceTransformers<S extends CachedSliceTransformer<any>[]> = {
 	[P in keyof S as NameFromCachedSliceTransformer<S[P]>]: StateFromCachedSliceTransformer<S[P]>
 }
 
-type TransformedStateFromCachedSliceTransformer<T> = T extends CachedSliceTransformer<any, infer TS>
-	? TS
-	: never
+type TransformedStateFromCachedSliceTransformer<T> =
+	T extends CachedSliceTransformer<any, infer TS> ? TS : never
 
 type TransformedStateFromCachedSliceTransformers<S extends CachedSliceTransformer<any>[]> = {
 	[P in keyof S as NameFromCachedSliceTransformer<
@@ -59,10 +55,10 @@ const THUNK_ACTION_REGEXP = /\/(fulfilled|pending|rejected)$/
 
 export const stripPayload = <T extends Action>(s: T) => ({ type: s.type })
 
-export const DEFAULT_COMBINED_ACTION_TRANSFORMER: ActionTransformer = (a: AnyAction) =>
+export const DEFAULT_COMBINED_ACTION_TRANSFORMER: ActionTransformer = (a: UnknownAction) =>
 	THUNK_ACTION_REGEXP.test(a.type) ? stripPayload(a) : a
 
-const DEFAULT_SLICE_ACTION_TRANSFORMER: ActionTransformer = (a: AnyAction) => a
+const DEFAULT_SLICE_ACTION_TRANSFORMER: ActionTransformer = (a: UnknownAction) => a
 
 /**
  * Create a transformer from a slice and a transform function. Also takes an
@@ -102,7 +98,7 @@ export const createSliceTransformer = <
 
 export const combineActionTransformers =
 	<Transformers extends ActionTransformer[]>(transformers: Transformers) =>
-	<A extends Action = AnyAction>(action: A) => {
+	<A extends Action = UnknownAction>(action: A) => {
 		let transformedAction: any = action
 
 		for (const transformer of transformers) {
@@ -158,10 +154,7 @@ export const createReduxTransformer =
 		onError?: (e: unknown) => void,
 	) =>
 	(next: StoreEnhancerStoreCreator): StoreEnhancerStoreCreator =>
-	<S = any, A extends Action = AnyAction>(
-		reducer: Reducer<S, A>,
-		preloadedState?: PreloadedState<S>,
-	) => {
+	<S = any, A extends Action = UnknownAction>(reducer: Reducer<S, A>, preloadedState?: any) => {
 		const transformSideEffectsReducer: Reducer<S, A> = (s, a) => {
 			const newState = reducer(s, a)
 
